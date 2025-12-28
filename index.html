@@ -24,16 +24,6 @@
             overflow-x: hidden;
         }
 
-        .bg-decor {
-            position: fixed; opacity: 0.05; pointer-events: none; z-index: -1;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(20deg); }
-        }
-
         header { 
             text-align: center; padding: 50px 20px; 
             background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255, 140, 0, 0.3);
@@ -55,16 +45,14 @@
             padding: 25px 10px; text-align: center; border-radius: 16px; 
             cursor: pointer; transition: 0.4s; display: flex;
             flex-direction: column; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .cat-card:active { transform: scale(0.95); border-color: var(--orange); }
-        .cat-emoji { font-size: 1.5rem; margin-bottom: 8px; }
         .cat-card h3 { 
             margin: 0; font-family: 'Oswald'; color: var(--orange); 
             font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; 
         }
 
-        #view-products { display: none; animation: fadeIn 0.5s ease; }
+        #view-products { display: none; }
         .back-nav { color: var(--orange); cursor: pointer; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; }
 
         .product-item { 
@@ -78,25 +66,19 @@
 
         .admin-input { background: #000; border: 1px solid var(--orange); color: #fff; padding: 10px; width: 100%; margin-bottom: 5px; border-radius: 5px; box-sizing: border-box; }
         .admin-btn { background: transparent; border: 1px solid #333; color: #444; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem; margin-top: 10px; }
-
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     </style>
 </head>
 <body>
-
-<div class="bg-decor" style="top:10%; left:5%; font-size:3rem;"></div>
-<div class="bg-decor" style="bottom:15%; right:10%; font-size:4rem; animation-delay:2s;"></div>
-<div class="bg-decor" style="top:50%; right:5%; font-size:2rem; opacity:0.02;"></div>
 
 <header>
     <h1 class="logo">HAKUNA MATATA</h1>
     <p style="font-size: 0.7rem; letter-spacing: 4px; color: var(--gray);">CAFÉ BAR</p>
     <button class="admin-btn" onclick="authAdmin()">PANEL DE CONTROL</button>
+    <button class="admin-btn" onclick="resetForced()" style="opacity:0.3">REINICIAR</button>
 </header>
 
 <div class="container">
     <div id="view-categories" class="cat-grid"></div>
-
     <div id="view-products">
         <span class="back-nav" onclick="showHome()">← Volver al Menú Principal</span>
         <h2 id="cat-title" style="font-family:'Oswald'; border-left: 4px solid var(--orange); padding-left:15px; text-transform:uppercase;"></h2>
@@ -173,8 +155,7 @@
             {n: "CAFÉ EXPRESSO", p: "5.000", d: ""}, {n: "CAFÉ EXPRESSO DOBLE", p: "5.000", d: ""}, {n: "CAFÉ AMERICANO", p: "5.000", d: ""}, {n: "CAFÉ CAMPESINO", p: "6.000", d: ""}, 
             {n: "CAFÉ LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, {n: "MOCACCINO", p: "9.500", d: ""},
             {n: "CAFÉ BOMBOM", p: "10.500", d: ""}, {n: "LATTE CARAMELO", p: "11.000", d: ""}, 
-            {n: "AFFOGATO", p: "14.000", d: ""},
-            {n: "CANELAZO SIN LICOR", p: "9.000", d: ""}
+            {n: "AFFOGATO", p: "14.000", d: ""}, {n: "CANELAZO SIN LICOR", p: "9.000", d: ""}
         ]},
         "Café con Licor": { emoji: "", items: [
             {n: "CARAJILLO", p: "11.000", d: ""}, {n: "CAPUCCINO CON BAILEYS", p: "14.000", d: ""}, 
@@ -198,4 +179,112 @@
             {n: "CORONA", p: "12.000", d: ""}, {n: "SOL", p: "12.000", d: ""}, 
             {n: "HEINEKEN", p: "12.000", d: ""}, {n: "TECATE", p: "10.000", d: ""}, 
             {n: "AGUILA LIGHT", p: "10.000", d: ""}, {n: "CLUB COLOMBIA", p: "10.000", d: ""}, 
-            {n: "TRES CORDILLERAS
+            {n: "TRES CORDILLERAS ROSADA", p: "14.000", d: ""}, {n: "TRES CORDILLERAS NEGRA", p: "14.000", d: ""},
+            {n: "AZTECA", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANGO BICHE, CERVEZA NACIONAL"}, 
+            {n: "APPLE GREEN", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANZANA VERDE, CERVEZA NACIONAL"},
+            {n: "TAMARINDO MICHELADO", p: "7.500", d: ""}, 
+            {n: "MICHELADO TRADICIONAL", p: "2.500", d: ""}, 
+            {n: "MICHELADO MANGO BICHE", p: "3.500", d: ""}, {n: "MICHELADO MARACUYÁ", p: "3.500", d: ""}, 
+            {n: "MICHELADO MARACUMANGO", p: "4.000", d: ""}
+        ]},
+        "Limonadas": { emoji: "", items: [
+            {n: "LIMONADA NATURAL", p: "7.500", d: ""}, {n: "LIMONADA DE COCO", p: "11.000", d: ""}, 
+            {n: "LIMONADA DE CEREZA", p: "11.000", d: ""}, {n: "LIMONADA DE HIERBABUENA", p: "11.000", d: ""}, 
+            {n: "LIMONADA DE PIÑA", p: "11.000", d: ""}, {n: "LIMONADA DE MANGO BICHE", p: "12.000", d: ""}, 
+            {n: "LIMONADA MANGO BICHE Y HIERBABUENA", p: "13.500", d: ""}, 
+            {n: "LIMONADA MARACUMANGO Y HIERBABUENA", p: "13.500", d: ""}, 
+            {n: "LIMONADA DE SANDÍA", p: "13.500", d: ""}, {n: "LIMONADA ELÉCTRICA", p: "14.500", d: ""}, 
+            {n: "LIMONADA DE VINO", p: "20.000", d: ""}
+        ]}
+    };
+
+    let menu = JSON.parse(localStorage.getItem('hakunaMenuData')) || defaultMenu;
+
+    function saveToLocal() {
+        localStorage.setItem('hakunaMenuData', JSON.stringify(menu));
+    }
+
+    function resetForced() {
+        localStorage.removeItem('hakunaMenuData');
+        location.reload();
+    }
+
+    function loadCats() {
+        const c = document.getElementById('view-categories');
+        c.innerHTML = "";
+        Object.keys(menu).forEach(cat => {
+            const div = document.createElement('div');
+            div.className = 'cat-card';
+            div.innerHTML = `<h3>${cat}</h3>`;
+            div.onclick = () => showCat(cat);
+            c.appendChild(div);
+        });
+    }
+
+    function showCat(cat) {
+        activeCat = cat;
+        document.getElementById('view-categories').style.display = 'none';
+        document.getElementById('view-products').style.display = 'block';
+        document.getElementById('cat-title').innerText = cat;
+        renderItems();
+        window.scrollTo(0,0);
+    }
+
+    function renderItems() {
+        const l = document.getElementById('product-list');
+        l.innerHTML = "";
+        menu[activeCat].items.forEach((item, i) => {
+            const d = document.createElement('div');
+            d.className = 'product-item';
+            if(isAdmin) {
+                d.innerHTML = `
+                    <input class="admin-input" value="${item.n}" oninput="edit(${i},'n',this.value)">
+                    <input class="admin-input" value="${item.p}" oninput="edit(${i},'p',this.value)">
+                    <textarea class="admin-input" oninput="edit(${i},'d',this.value)">${item.d}</textarea>
+                    <button onclick="remove(${i})" style="color:red; background:none; border:none; cursor:pointer;">Eliminar</button>`;
+            } else {
+                d.innerHTML = `
+                    <div class="p-main-row"><span class="p-name">${item.n}</span><span class="p-price">$${item.p}</span></div>
+                    ${item.d ? `<div class="p-desc-view">${item.d}</div>` : ''}`;
+            }
+            l.appendChild(d);
+        });
+        document.getElementById('add-item-btn').style.display = isAdmin ? 'block' : 'none';
+    }
+
+    function showHome() {
+        document.getElementById('view-categories').style.display = 'grid';
+        document.getElementById('view-products').style.display = 'none';
+    }
+
+    function authAdmin() {
+        if(prompt("Contraseña:") === P) { 
+            isAdmin = true; 
+            loadCats(); 
+            if(activeCat) renderItems(); 
+        }
+    }
+
+    function edit(i, f, v) { 
+        menu[activeCat].items[i][f] = v; 
+        saveToLocal(); 
+    }
+
+    function addNew() { 
+        menu[activeCat].items.push({n: "NUEVO", p: "0", d: ""}); 
+        saveToLocal();
+        renderItems(); 
+    }
+
+    function remove(i) { 
+        if(confirm("¿Eliminar?")) { 
+            menu[activeCat].items.splice(i, 1); 
+            saveToLocal();
+            renderItems(); 
+        } 
+    }
+
+    loadCats();
+</script>
+</body>
+</html>
