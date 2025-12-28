@@ -113,28 +113,36 @@
     // Datos iniciales por defecto sin emojis
     const defaultMenu = {
         "Entradas": { emoji: "", items: [
-            {n: "PATACONES POR DIEZ UNIDADES", p: "13.500", d: ""}, 
-            {n: "AREPAS FRITAS POR DIEZ UNIDADES", p: "12.000", d: ""}, 
-            {n: "PORCIÓN DE PAPAS FRITAS", p: "8.000", d: ""}
+            {n: "PATACONES x10", p: "13.500", d: ""}, 
+            {n: "AREPAS FRITAS x10", p: "12.000", d: ""}, 
+            {n: "PORCIÓN DE PAPAS A LA FRANCESA", p: "8.000", d: ""}
         ]},
         "Hamburguesas": { emoji: "", items: [
-            {n: "HAMBURGUESA TRADICIONAL", p: "25.000", d: ""}, 
-            {n: "HAMBURGUESA HAWAIANA", p: "27.000", d: ""}, 
-            {n: "HAMBURGUESA GRATINADA", p: "30.000", d: ""}, 
-            {n: "HAMBURGUESA CON CHORIZO", p: "27.000", d: ""}
+            {n: "HAMBURGUESA TRADICIONAL", p: "25.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA.
+"}, 
+            {n: "HAMBURGUESA HAWAIANA", p: "27.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, PIÑA ASADA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA.
+"}, 
+            {n: "HAMBURGUESA GRATINADA", p: "30.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA, QUESO EXTRA.
+"}, 
+            {n: "HAMBURGUESA DE CHORIZO", p: "27.000", d: "CARNE DE CHORIZO, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA."}
         ]},
         "Carnes": { emoji: "", items: [
-            {n: "PUNTA DE ANCA", p: "42.000", d: ""}, 
-            {n: "CHURRASCO", p: "42.000", d: ""}, 
-            {n: "PLATO DE CHORIZO UNA UNIDAD", p: "14.000", d: ""}, 
-            {n: "PLATO DE CHORIZO DOS UNIDADES", p: "23.000", d: ""}
+            {n: "PUNTA DE ANCA", p: "42.000", d: "250 GRAMOS DE PUNTA DE ANCA AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA
+"}, 
+            {n: "CHURRASCO", p: "42.000", d: "250 GRAMOS DE CHURRASCO AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA
+"}, 
+            {n: "PLATO DE CHORIZO X1", p: "14.000", d: "UN CHORIZO SANTARROSANO, TOMATE, LIMÓN, PAPA RUSTICA
+"}, 
+            {n: "PLATO DE CHORIZO X2", p: "23.000", d: "DOS CHORIZOS SANTARROSANOS, TOMATE, LIMÓN, PAPA RUSTICA
+"}
+            {n: "PICADA HAKUNA X2", p: "60.000", d: "500 GRAMOS DE PROTEINA (SOLOMO DE RES, LOMO DE CERDO, TOCINETA, PECHUGA, CHORIZO SANTARROSANO), ACOMPAÑADA DE PAPA RUSTICA, PAPA CRIOLLA, AREPA, PATACONES, LECHUGA, TOMATE, LIMON, GUACAMOLE Y CHIMICHURRI DE LA CASA"}
         ]},
         "Salchipapas y más": { emoji: "", items: [
-            {n: "SALCHIPAPA MINI", p: "18.000", d: ""}, 
-            {n: "SALCHIPAPA TRADICIONAL", p: "26.000", d: ""}, 
-            {n: "SALCHIPAPA ESPECIAL", p: "30.000", d: ""}, 
-            {n: "MAICITOS", p: "27.000", d: ""}, 
-            {n: "QUESADILLAS", p: "16.000", d: ""}
+            {n: "SALCHIPAPA MINI", p: "18.000", d: "PAPAS A LA FRANCESA, PAPA RÚSTICA, SALCHICHA AHUMADA, HUEVO DE CODORNIZ, QUESO CUAJADA."}, 
+            {n: "SALCHIPAPA TRADICIONAL", p: "26.000", d: "PAPAS A LA FRANCESA, PAPA RUSTICA, PAPA CRIOLLA, SALCHICHA AHUMADA, HUEVO DE CODORNIZ, MOZZARELLA, QUESO CUAJADA, TOCINETA."}, 
+            {n: "SALCHIPAPA ESPECIAL", p: "30.000", d: "PAPAS A LA FRANCESA, PAPA RÚSTICA, PAPA CRIOLLA, CARNE, POLLO, SALCHICHA AHUMADA, MAÍZ TIERNO, HUEVOS DE CODORNIZ, MOZZARELLA, QUESO CUAJADA, TOCINETA."}, 
+            {n: "MAICITOS", p: "27.000", d: "MAÍZ TIERNO, CARNE, POLLO, BÁTAVIA, CREMA DE LECHE, MOZZARELLA, TOCINETA, CUAJADA, TROCITOS DE CHICHARRÓN"}, 
+            {n: "QUESADILLAS", p: "16.000", d: "CARNE, POLLO, BÁTAVIA, CREMA DE LECHE, MOZZARELLA, TORTILLA DE MAÍZ, SALSA DE MAÍZ DE LA CASA"}
         ]},
         "Jugos en Agua": { emoji: "", items: [
             {n: "JUGO DE MARACUYÁ", p: "7.500", d: ""}, {n: "JUGO DE MANGO", p: "7.500", d: ""}, 
@@ -155,30 +163,30 @@
         ]},
         "Malteadas": { emoji: "", items: [
             {n: "MALTEADA DE VAINILLA", p: "17.000", d: ""}, {n: "MALTEADA DE CHOCOLATE", p: "17.000", d: ""}, 
-            {n: "MALTEADA DE OREO O BROWNIE", p: "17.000", d: ""}, {n: "MALTEADA DE FRESA", p: "17.000", d: ""}, 
+            {n: "MALTEADA DE OREO", p: "17.000", d: ""}, {n: "MALTEADA DE FRESA", p: "17.000", d: ""}, 
             {n: "MALTEADA DE COCO", p: "17.000", d: ""}, {n: "MALTEADA DE CAFÉ", p: "17.000", d: ""}, 
-            {n: "MALTEADA DE VAINILLA CON CHIPS", p: "17.000", d: ""}
+            {n: "MALTEADA DE VAINILLACHIPS", p: "17.000", d: ""}
         ]},
         "Mezclas y Sodas": { emoji: "", items: [
-            {n: "MEZCLA ESPECIAL UNO", p: "16.000", d: ""}, {n: "MEZCLA ESPECIAL DOS", p: "16.000", d: ""}, 
-            {n: "MEZCLA ESPECIAL TRES", p: "16.000", d: ""}, {n: "SODA SABORIZADA", p: "12.000", d: ""}
+            {n: "MEZCLA FRESCA 1", p: "16.000", d: "SODA, MARACUYÁ, CEREZA, LIMÓN"}, {n: "MEZCLA FRESCA 2", p: "16.000", d: "SODA, MANZANA, CEREZA, PIÑA"}, 
+            {n: "MEZCLA FRESCA 3", p: "16.000", d: "SODA, MANDARINA, HIERBABUENA, MANGO BICHE"}, {n: "SODA SABORIZADA", p: "12.000", d: "MARACUYÁ Y LIMÓN, CURAZAO Y NARANJA, FRESA Y PERA"}
         ]},
         "Cocteles": { emoji: "", items: [
             {n: "COPA DE VINO", p: "15.000", d: ""}, {n: "COCTEL VINO CALIENTE", p: "28.000", d: ""}, 
             {n: "MARGARITA", p: "25.000", d: ""}, {n: "HAKUNA EN LA NOCHE", p: "30.000", d: ""}, 
             {n: "BLUE DAIQUIRI", p: "28.000", d: ""}, {n: "MOJITO", p: "26.000", d: ""}, 
-            {n: "PIÑA COLADA", p: "28.000", d: ""}, {n: "ORGASMO", p: "28.000", d: ""}, 
-            {n: "AZTECA", p: "17.500", d: ""}, {n: "APPLE GREEN", p: "17.500", d: ""}
+            {n: "PIÑA COLADA", p: "28.000", d: ""}, {n: "ORGASMO", p: "28.000", d: ""}
         ]},
         "Café": { emoji: "", items: [
-            {n: "CAFÉ AMERICANO", p: "5.000", d: ""}, {n: "CAFÉ CAMPESINO", p: "6.000", d: ""}, 
-            {n: "CAFÉ LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, 
+            {n: "CAFÉ EXPRESSO", p: "5.000", d: ""}, {n: "CAFÉ EXPRESSO DOBLE", p: "5.000", d: ""}, {n: "CAFÉ AMERICANO", p: "5.000", d: ""}, {n: "CAFÉ CAMPESINO", p: "6.000", d: ""}, 
+            {n: "CAFÉ LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, {n: "MOCACCINO", p: "9.500", d: ""} 
             {n: "CAFÉ BOMBOM", p: "10.500", d: ""}, {n: "LATTE CARAMELO", p: "11.000", d: ""}, 
             {n: "AFFOGATO", p: "14.000", d: ""}
+            {n: "CANELAZO SIN LICOR", p: "9.000", d: ""}
         ]},
         "Café con Licor": { emoji: "", items: [
             {n: "CARAJILLO", p: "11.000", d: ""}, {n: "CAPUCCINO CON BAILEYS", p: "14.000", d: ""}, 
-            {n: "CANELAZO CON LICOR", p: "14.500", d: ""}, {n: "CANELAZO SIN LICOR", p: "9.000", d: ""}
+            {n: "CANELAZO CON LICOR", p: "14.500", d: ""}
         ]},
         "Chocolate y Milo": { emoji: "", items: [
             {n: "MILO FRÍO", p: "12.000", d: ""}, {n: "CHOCOLATE EN AGUA", p: "6.000", d: ""}, 
@@ -188,20 +196,21 @@
         "Aromáticas y Más": { emoji: "", items: [
             {n: "AROMÁTICA SENCILLA", p: "4.000", d: ""}, {n: "AROMÁTICA CON PANELITA", p: "6.000", d: ""}, 
             {n: "MIX DE FRUTAS", p: "10.000", d: ""}, {n: "AGUAPANELA CON QUESO", p: "9.000", d: ""}, 
-            {n: "BOTELLA DE AGUA", p: "6.000", d: ""}
+            {n: "BOTELLA DE AGUA", p: "6.000", d: ""}, {n: "MAICENITA", p: "9.000", d: "AREQUIPE, VAINILLA, CHOCOLATE, MILO, CAFÉ, COCO"}
         ]},
         "Adiciones": { emoji: "", items: [
             {n: "ADICIÓN DE QUESO", p: "5.000", d: ""}, {n: "ADICIÓN DE LICOR", p: "6.000", d: ""}, 
             {n: "ADICIÓN DE MANGO BICHE", p: "2.000", d: ""}
         ]},
         "Cervezas": { emoji: "", items: [
-            {n: "CERVEZA CORONA", p: "12.000", d: ""}, {n: "CERVEZA SOL", p: "12.000", d: ""}, 
-            {n: "CERVEZA HEINEKEN", p: "12.000", d: ""}, {n: "CERVEZA TECATE", p: "10.000", d: ""}, 
-            {n: "CERVEZA AGUILA LIGHT", p: "10.000", d: ""}, {n: "CERVEZA CLUB COLOMBIA", p: "10.000", d: ""}, 
-            {n: "CERVEZA TRES CORDILLERAS ROSADA", p: "14.000", d: ""}, {n: "CERVEZA TRES CORDILLERAS NEGRA", p: "14.000", d: ""}
-        ]},
-        "Michelados": { emoji: "", items: [
-            {n: "TAMARINDO MICHELADO", p: "7.500", d: ""}, {n: "MICHELADO TRADICIONAL", p: "2.500", d: ""}, 
+            {n: "CORONA", p: "12.000", d: ""}, {n: "SOL", p: "12.000", d: ""}, 
+            {n: "HEINEKEN", p: "12.000", d: ""}, {n: "TECATE", p: "10.000", d: ""}, 
+            {n: "AGUILA LIGHT", p: "10.000", d: ""}, {n: "CLUB COLOMBIA", p: "10.000", d: ""}, 
+            {n: "TRES CORDILLERAS ROSADA", p: "14.000", d: ""}, {n: "TRES CORDILLERAS NEGRA", p: "14.000", d: ""}
+            {n: "AZTECA", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANGO BICHE, CERVEZA NACIONAL"}, 
+            {n: "APPLE GREEN", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANZANA VERDE, CERVEZA NACIONAL"}
+            {n: "TAMARINDO MICHELADO", p: "7.500", d: ""}, 
+            {n: "MICHELADO TRADICIONAL", p: "2.500", d: ""}, 
             {n: "MICHELADO MANGO BICHE", p: "3.500", d: ""}, {n: "MICHELADO MARACUYÁ", p: "3.500", d: ""}, 
             {n: "MICHELADO MARACUMANGO", p: "4.000", d: ""}
         ]},
