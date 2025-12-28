@@ -3,253 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakuna Matata | Menú Experiencia</title>
+    <title>Hakuna Matata | Menú Completo</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --orange: #ff8c00; 
-            --bg: #0a0a0a; 
-            --card: #161616; 
-            --text: #ffffff; 
-            --gray: #999999;
-        }
-
-        body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            font-family: 'Montserrat', sans-serif; 
-            margin: 0; 
-            background-image: radial-gradient(circle at top, #1a1a1a 0%, #0a0a0a 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        header { 
-            text-align: center; padding: 50px 20px; 
-            background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255, 140, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-        
-        .logo { 
-            font-family: 'Oswald', sans-serif; font-size: 2.8rem; 
-            color: var(--orange); letter-spacing: 6px; margin: 0; 
-            text-transform: uppercase; text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .container { max-width: 700px; margin: auto; padding: 20px; }
-
-        .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-
-        .cat-card { 
-            background: var(--card); border: 1px solid rgba(255,255,255,0.05); 
-            padding: 25px 10px; text-align: center; border-radius: 16px; 
-            cursor: pointer; transition: 0.4s; display: flex;
-            flex-direction: column; align-items: center; justify-content: center;
-        }
-        .cat-card:active { transform: scale(0.95); border-color: var(--orange); }
-        .cat-card h3 { 
-            margin: 0; font-family: 'Oswald'; color: var(--orange); 
-            font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; 
-        }
-
+        :root { --orange: #ff8c00; --bg: #0a0a0a; --card: #161616; --text: #ffffff; --gray: #999999; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; margin: 0; min-height: 100vh; }
+        header { text-align: center; padding: 40px 20px; background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--orange); }
+        .logo { font-family: 'Oswald', sans-serif; font-size: 2.2rem; color: var(--orange); letter-spacing: 4px; margin: 0; text-transform: uppercase; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .cat-card { background: var(--card); border: 1px solid #333; padding: 20px 5px; text-align: center; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+        .cat-card h3 { margin: 0; font-family: 'Oswald'; color: var(--orange); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
         #view-products { display: none; }
-        .back-nav { color: var(--orange); cursor: pointer; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; }
-
-        .product-item { 
-            background: rgba(255,255,255,0.03); margin-bottom: 12px; 
-            padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
-        }
+        .back-nav { color: var(--orange); cursor: pointer; font-size: 0.8rem; margin-bottom: 20px; display: block; font-weight: bold; }
+        .product-item { background: #1a1a1a; margin-bottom: 12px; padding: 15px; border-radius: 10px; border-left: 4px solid var(--orange); }
         .p-main-row { display: flex; justify-content: space-between; align-items: baseline; }
         .p-name { font-family: 'Oswald'; color: var(--orange); font-size: 1.1rem; text-transform: uppercase; }
-        .p-price { font-family: 'Oswald'; font-weight: 700; color: #fff; }
-        .p-desc-view { font-size: 0.85rem; color: var(--gray); margin-top: 5px; line-height: 1.4; }
-
-        .admin-input { background: #000; border: 1px solid var(--orange); color: #fff; padding: 10px; width: 100%; margin-bottom: 5px; border-radius: 5px; box-sizing: border-box; }
-        .admin-btn { background: transparent; border: 1px solid #333; color: #444; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem; margin-top: 10px; }
+        .p-price { font-family: 'Oswald'; color: #fff; font-size: 1.1rem; }
+        .p-desc-view { font-size: 0.8rem; color: #bbb; margin-top: 5px; line-height: 1.3; }
+        .admin-input { background: #000; border: 1px solid var(--orange); color: #fff; padding: 8px; width: 100%; margin-top: 5px; border-radius: 4px; box-sizing: border-box; font-size: 0.9rem; }
+        .admin-btn { background: #222; border: 1px solid #444; color: #888; padding: 8px 12px; border-radius: 20px; cursor: pointer; font-size: 0.65rem; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1 class="logo">HAKUNA MATATA</h1>
-    <p style="font-size: 0.7rem; letter-spacing: 4px; color: var(--gray);">CAFÉ BAR</p>
-    <button class="admin-btn" onclick="authAdmin()">PANEL DE CONTROL</button>
-    <button class="admin-btn" onclick="resetForced()" style="opacity:0.3">REINICIAR</button>
+    <button class="admin-btn" onclick="authAdmin()">⚙️ PANEL</button>
+    <button class="admin-btn" onclick="limpiarTodo()" style="color: #666;">♻️ RESET</button>
 </header>
 
 <div class="container">
     <div id="view-categories" class="cat-grid"></div>
     <div id="view-products">
-        <span class="back-nav" onclick="showHome()">← Volver al Menú Principal</span>
-        <h2 id="cat-title" style="font-family:'Oswald'; border-left: 4px solid var(--orange); padding-left:15px; text-transform:uppercase;"></h2>
+        <span class="back-nav" onclick="showHome()">← VOLVER AL MENÚ</span>
+        <h2 id="cat-title" style="font-family:'Oswald'; color: white; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px;"></h2>
         <div id="product-list"></div>
         <button id="add-item-btn" style="display:none; width:100%; padding:15px; background:var(--orange); border:none; border-radius:10px; font-weight:700; cursor:pointer; margin-top: 20px;" onclick="addNew()">+ AGREGAR PRODUCTO</button>
     </div>
 </div>
 
 <script>
-    const P = "Juano0709+";
-    let isAdmin = false;
-    let activeCat = "";
+    const CLAVE = "Juano0709+";
+    let modoAdmin = false;
+    let categoriaActual = "";
 
-    const defaultMenu = {
-        "Entradas": { emoji: "", items: [
-            {n: "PATACONES x10", p: "13.500", d: ""}, 
-            {n: "AREPAS FRITAS x10", p: "12.000", d: ""}, 
-            {n: "PORCIÓN DE PAPAS A LA FRANCESA", p: "8.000", d: ""}
-        ]},
-        "Hamburguesas": { emoji: "", items: [
-            {n: "HAMBURGUESA TRADICIONAL", p: "25.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA."}, 
-            {n: "HAMBURGUESA HAWAIANA", p: "27.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, PIÑA ASADA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA."}, 
-            {n: "HAMBURGUESA GRATINADA", p: "30.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA, QUESO EXTRA."}, 
-            {n: "HAMBURGUESA DE CHORIZO", p: "27.000", d: "CARNE DE CHORIZO, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA."}
-        ]},
-        "Carnes": { emoji: "", items: [
-            {n: "PUNTA DE ANCA", p: "42.000", d: "250 GRAMOS DE PUNTA DE ANCA AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA"}, 
-            {n: "CHURRASCO", p: "42.000", d: "250 GRAMOS DE CHURRASCO AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA"}, 
-            {n: "PLATO DE CHORIZO X1", p: "14.000", d: "UN CHORIZO SANTARROSANO, TOMATE, LIMÓN, PAPA RUSTICA"}, 
-            {n: "PLATO DE CHORIZO X2", p: "23.000", d: "DOS CHORIZOS SANTARROSANOS, TOMATE, LIMÓN, PAPA RUSTICA"},
-            {n: "PICADA HAKUNA X2", p: "60.000", d: "500 GRAMOS DE PROTEINA (SOLOMO DE RES, LOMO DE CERDO, TOCINETA, PECHUGA, CHORIZO SANTARROSANO), ACOMPAÑADA DE PAPA RUSTICA, PAPA CRIOLLA, AREPA, PATACONES, LECHUGA, TOMATE, LIMON, GUACAMOLE Y CHIMICHURRI DE LA CASA"}
-        ]},
-        "Salchipapas y más": { emoji: "", items: [
-            {n: "SALCHIPAPA MINI", p: "18.000", d: "PAPAS A LA FRANCESA, PAPA RÚSTICA, SALCHICHA AHUMADA, HUEVO DE CODORNIZ, QUESO CUAJADA."}, 
-            {n: "SALCHIPAPA TRADICIONAL", p: "26.000", d: "PAPAS A LA FRANCESA, PAPA RUSTICA, PAPA CRIOLLA, SALCHICHA AHUMADA, HUEVO DE CODORNIZ, MOZZARELLA, QUESO CUAJADA, TOCINETA."}, 
-            {n: "SALCHIPAPA ESPECIAL", p: "30.000", d: "PAPAS A LA FRANCESA, PAPA RÚSTICA, PAPA CRIOLLA, CARNE, POLLO, SALCHICHA AHUMADA, MAÍZ TIERNO, HUEVOS DE CODORNIZ, MOZZARELLA, QUESO CUAJADA, TOCINETA."}, 
-            {n: "MAICITOS", p: "27.000", d: "MAÍZ TIERNO, CARNE, POLLO, BÁTAVIA, CREMA DE LECHE, MOZZARELLA, TOCINETA, CUAJADA, TROCITOS DE CHICHARRÓN"}, 
-            {n: "QUESADILLAS", p: "16.000", d: "CARNE, POLLO, BÁTAVIA, CREMA DE LECHE, MOZZARELLA, TORTILLA DE MAÍZ, SALSA DE MAÍZ DE LA CASA"}
-        ]},
-        "Jugos en Agua": { emoji: "", items: [
-            {n: "JUGO DE MARACUYÁ", p: "7.500", d: ""}, {n: "JUGO DE MANGO", p: "7.500", d: ""}, 
-            {n: "JUGO DE PIÑA", p: "7.500", d: ""}, {n: "JUGO DE MORA", p: "7.500", d: ""}, 
-            {n: "JUGO DE FRESA", p: "7.500", d: ""}, {n: "JUGO DE LULO", p: "7.500", d: ""}, 
-            {n: "JUGO DE GUANÁBANA", p: "7.500", d: ""}
-        ]},
-        "Jugos en Leche": { emoji: "", items: [
-            {n: "JUGO DE MARACUYÁ EN LECHE", p: "8.500", d: ""}, {n: "JUGO DE MANGO EN LECHE", p: "8.500", d: ""}, 
-            {n: "JUGO DE PIÑA EN LECHE", p: "8.500", d: ""}, {n: "JUGO DE MORA EN LECHE", p: "8.500", d: ""}, 
-            {n: "JUGO DE FRESA EN LECHE", p: "8.500", d: ""}, {n: "JUGO DE LULO EN LECHE", p: "8.500", d: ""}, 
-            {n: "JUGO DE GUANÁBANA EN LECHE", p: "8.500", d: ""}
-        ]},
-        "Frappés": { emoji: "", items: [
-            {n: "FRAPPÉ DE MANGO BICHE", p: "13.500", d: ""}, {n: "FRAPPÉ DE MILO", p: "14.000", d: ""}, 
-            {n: "FRAPPÉ DE CAFÉ", p: "14.000", d: ""}, {n: "FRAPPÉ DE MARACUYÁ", p: "16.000", d: ""}, 
-            {n: "FRAPPUCCINO", p: "16.000", d: ""}
-        ]},
-        "Malteadas": { emoji: "", items: [
-            {n: "MALTEADA DE VAINILLA", p: "17.000", d: ""}, {n: "MALTEADA DE CHOCOLATE", p: "17.000", d: ""}, 
-            {n: "MALTEADA DE OREO", p: "17.000", d: ""}, {n: "MALTEADA DE FRESA", p: "17.000", d: ""}, 
-            {n: "MALTEADA DE COCO", p: "17.000", d: ""}, {n: "MALTEADA DE CAFÉ", p: "17.000", d: ""}, 
-            {n: "MALTEADA DE VAINILLACHIPS", p: "17.000", d: ""}
-        ]},
-        "Mezclas y Sodas": { emoji: "", items: [
-            {n: "MEZCLA FRESCA 1", p: "16.000", d: "SODA, MARACUYÁ, CEREZA, LIMÓN"}, {n: "MEZCLA FRESCA 2", p: "16.000", d: "SODA, MANZANA, CEREZA, PIÑA"}, 
-            {n: "MEZCLA FRESCA 3", p: "16.000", d: "SODA, MANDARINA, HIERBABUENA, MANGO BICHE"}, {n: "SODA SABORIZADA", p: "12.000", d: "MARACUYÁ Y LIMÓN, CURAZAO Y NARANJA, FRESA Y PERA"}
-        ]},
-        "Cocteles": { emoji: "", items: [
-            {n: "COPA DE VINO", p: "15.000", d: ""}, {n: "COCTEL VINO CALIENTE", p: "28.000", d: ""}, 
-            {n: "MARGARITA", p: "25.000", d: ""}, {n: "HAKUNA EN LA NOCHE", p: "30.000", d: ""}, 
-            {n: "BLUE DAIQUIRI", p: "28.000", d: ""}, {n: "MOJITO", p: "26.000", d: ""}, 
-            {n: "PIÑA COLADA", p: "28.000", d: ""}, {n: "ORGASMO", p: "28.000", d: ""}
-        ]},
-        "Café": { emoji: "", items: [
-            {n: "CAFÉ EXPRESSO", p: "5.000", d: ""}, {n: "CAFÉ EXPRESSO DOBLE", p: "5.000", d: ""}, {n: "CAFÉ AMERICANO", p: "5.000", d: ""}, {n: "CAFÉ CAMPESINO", p: "6.000", d: ""}, 
-            {n: "CAFÉ LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, {n: "MOCACCINO", p: "9.500", d: ""},
-            {n: "CAFÉ BOMBOM", p: "10.500", d: ""}, {n: "LATTE CARAMELO", p: "11.000", d: ""}, 
-            {n: "AFFOGATO", p: "14.000", d: ""}, {n: "CANELAZO SIN LICOR", p: "9.000", d: ""}
-        ]},
-        "Café con Licor": { emoji: "", items: [
-            {n: "CARAJILLO", p: "11.000", d: ""}, {n: "CAPUCCINO CON BAILEYS", p: "14.000", d: ""}, 
-            {n: "CANELAZO CON LICOR", p: "14.500", d: ""}
-        ]},
-        "Chocolate y Milo": { emoji: "", items: [
-            {n: "MILO FRÍO", p: "12.000", d: ""}, {n: "CHOCOLATE EN AGUA", p: "6.000", d: ""}, 
-            {n: "CHOCOLATE EN LECHE", p: "8.000", d: ""}, {n: "CHOCOMELO", p: "12.500", d: ""}, 
-            {n: "MILO CALIENTE", p: "9.000", d: ""}, {n: "MILOMELO", p: "15.000", d: ""}
-        ]},
-        "Aromáticas y Más": { emoji: "", items: [
-            {n: "AROMÁTICA SENCILLA", p: "4.000", d: ""}, {n: "AROMÁTICA CON PANELITA", p: "6.000", d: ""}, 
-            {n: "MIX DE FRUTAS", p: "10.000", d: ""}, {n: "AGUAPANELA CON QUESO", p: "9.000", d: ""}, 
-            {n: "BOTELLA DE AGUA", p: "6.000", d: ""}, {n: "MAICENITA", p: "9.000", d: "AREQUIPE, VAINILLA, CHOCOLATE, MILO, CAFÉ, COCO"}
-        ]},
-        "Adiciones": { emoji: "", items: [
-            {n: "ADICIÓN DE QUESO", p: "5.000", d: ""}, {n: "ADICIÓN DE LICOR", p: "6.000", d: ""}, 
-            {n: "ADICIÓN DE MANGO BICHE", p: "2.000", d: ""}
-        ]},
-        "Cervezas": { emoji: "", items: [
-            {n: "CORONA", p: "12.000", d: ""}, {n: "SOL", p: "12.000", d: ""}, 
-            {n: "HEINEKEN", p: "12.000", d: ""}, {n: "TECATE", p: "10.000", d: ""}, 
-            {n: "AGUILA LIGHT", p: "10.000", d: ""}, {n: "CLUB COLOMBIA", p: "10.000", d: ""}, 
-            {n: "TRES CORDILLERAS ROSADA", p: "14.000", d: ""}, {n: "TRES CORDILLERAS NEGRA", p: "14.000", d: ""},
-            {n: "AZTECA", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANGO BICHE, CERVEZA NACIONAL"}, 
-            {n: "APPLE GREEN", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANZANA VERDE, CERVEZA NACIONAL"},
-            {n: "TAMARINDO MICHELADO", p: "7.500", d: ""}, 
-            {n: "MICHELADO TRADICIONAL", p: "2.500", d: ""}, 
-            {n: "MICHELADO MANGO BICHE", p: "3.500", d: ""}, {n: "MICHELADO MARACUYÁ", p: "3.500", d: ""}, 
-            {n: "MICHELADO MARACUMANGO", p: "4.000", d: ""}
-        ]},
-        "Limonadas": { emoji: "", items: [
-            {n: "LIMONADA NATURAL", p: "7.500", d: ""}, {n: "LIMONADA DE COCO", p: "11.000", d: ""}, 
-            {n: "LIMONADA DE CEREZA", p: "11.000", d: ""}, {n: "LIMONADA DE HIERBABUENA", p: "11.000", d: ""}, 
-            {n: "LIMONADA DE PIÑA", p: "11.000", d: ""}, {n: "LIMONADA DE MANGO BICHE", p: "12.000", d: ""}, 
-            {n: "LIMONADA MANGO BICHE Y HIERBABUENA", p: "13.500", d: ""}, 
-            {n: "LIMONADA MARACUMANGO Y HIERBABUENA", p: "13.500", d: ""}, 
-            {n: "LIMONADA DE SANDÍA", p: "13.500", d: ""}, {n: "LIMONADA ELÉCTRICA", p: "14.500", d: ""}, 
-            {n: "LIMONADA DE VINO", p: "20.000", d: ""}
-        ]}
+    const menuInicial = {
+        "Entradas": { items: [{n: "PATACONES x10", p: "13.500", d: ""}, {n: "AREPAS FRITAS x10", p: "12.000", d: ""}, {n: "PAPAS FRANCESA", p: "8.000", d: ""}] },
+        "Hamburguesas": { items: [{n: "TRADICIONAL", p: "25.000", d: "CARNE CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES."}, {n: "HAWAIANA", p: "27.000", d: "PIÑA ASADA, CARNE CASA, TOCINETA, MOZZARELLA."}, {n: "GRATINADA", p: "30.000", d: "EXTRA QUESO, CARNE CASA, TOCINETA."}, {n: "CHORIZO", p: "27.000", d: "CARNE DE CHORIZO, VEGETALES."}] },
+        "Carnes": { items: [{n: "PUNTA DE ANCA", p: "42.000", d: "250g, PAPA, ENSALADA, PIÑA, GUACAMOLE."}, {n: "CHURRASCO", p: "42.000", d: "250g, PAPA, ENSALADA, PIÑA, GUACAMOLE."}, {n: "PICADA HAKUNA X2", p: "60.000", d: "RES, CERDO, POLLO, CHORIZO, PAPA, PATACÓN."}] },
+        "Salchipapas": { items: [{n: "MINI", p: "18.000", d: ""}, {n: "TRADICIONAL", p: "26.000", d: "SALCHICHA AHUMADA, QUESOS, TOCINETA."}, {n: "ESPECIAL", p: "30.000", d: "CARNE, POLLO, MAÍZ, QUESOS."}] },
+        "Maicitos": { items: [{n: "MAICITOS", p: "27.000", d: "RES, POLLO, TOCINETA, QUESOS, CHICHARRÓN."}] },
+        "Quesadillas": { items: [{n: "QUESADILLAS", p: "16.000", d: "CARNE, POLLO, MOZZARELLA, SALSA MAÍZ."}] },
+        "Jugos en Agua": { items: [{n: "MARACUYÁ", p: "7.500", d: ""}, {n: "MANGO", p: "7.500", d: ""}, {n: "FRESA", p: "7.500", d: ""}, {n: "LULO", p: "7.500", d: ""}] },
+        "Jugos en Leche": { items: [{n: "MARACUYÁ", p: "8.500", d: ""}, {n: "MANGO", p: "8.500", d: ""}, {n: "MORA", p: "8.500", d: ""}, {n: "FRESA", p: "8.500", d: ""}] },
+        "Frappés": { items: [{n: "MANGO BICHE", p: "13.500", d: ""}, {n: "MILO", p: "14.000", d: ""}, {n: "CAFÉ", p: "14.000", d: ""}, {n: "FRAPPUCCINO", p: "16.000", d: ""}] },
+        "Malteadas": { items: [{n: "VAINILLA", p: "17.000", d: ""}, {n: "CHOCOLATE", p: "17.000", d: ""}, {n: "OREO", p: "17.000", d: ""}, {n: "CAFÉ", p: "17.000", d: ""}] },
+        "Mezclas y Sodas": { items: [{n: "MEZCLA FRESCA 1", p: "16.000", d: "SODA, MARACUYÁ, CEREZA, LIMÓN."}, {n: "SODA SABORIZADA", p: "12.000", d: ""}] },
+        "Cocteles": { items: [{n: "MARGARITA", p: "25.000", d: ""}, {n: "MOJITO", p: "26.000", d: ""}, {n: "PIÑA COLADA", p: "28.000", d: ""}, {n: "VINO CALIENTE", p: "28.000", d: ""}] },
+        "Café": { items: [{n: "AMERICANO", p: "5.000", d: ""}, {n: "LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, {n: "AFFOGATO", p: "14.000", d: ""}] },
+        "Café con Licor": { items: [{n: "CARAJILLO", p: "11.000", d: ""}, {n: "CAPUCCINO BAILEYS", p: "14.000", d: ""}] },
+        "Chocolate y Milo": { items: [{n: "MILO FRÍO", p: "12.000", d: ""}, {n: "CHOCO LECHE", p: "8.000", d: ""}, {n: "MILOMELO", p: "15.000", d: ""}] },
+        "Aromáticas": { items: [{n: "SENCILLA", p: "4.000", d: ""}, {n: "AGUAPANELA QUESO", p: "9.000", d: ""}] },
+        "Cervezas": { items: [{n: "CORONA", p: "12.000", d: ""}, {n: "CLUB COLOMBIA", p: "10.000", d: ""}, {n: "AZTECA", p: "17.500", d: "TEQUILA, LIMÓN, MANGO BICHE."}] },
+        "Limonadas": { items: [{n: "NATURAL", p: "7.500", d: ""}, {n: "COCO", p: "11.000", d: ""}, {n: "CEREZA", p: "11.000", d: ""}, {n: "VINO", p: "20.000", d: ""}] },
+        "Adiciones": { items: [{n: "QUESO", p: "5.000", d: ""}, {n: "LICOR", p: "6.000", d: ""}] }
     };
 
-    let menu = JSON.parse(localStorage.getItem('hakunaMenuData')) || defaultMenu;
+    let datosMenu = JSON.parse(localStorage.getItem('hakuna_final_db')) || menuInicial;
 
-    function saveToLocal() {
-        localStorage.setItem('hakunaMenuData', JSON.stringify(menu));
-    }
-
-    function resetForced() {
-        localStorage.removeItem('hakunaMenuData');
-        location.reload();
-    }
-
-    function loadCats() {
-        const c = document.getElementById('view-categories');
-        c.innerHTML = "";
-        Object.keys(menu).forEach(cat => {
-            const div = document.createElement('div');
-            div.className = 'cat-card';
-            div.innerHTML = `<h3>${cat}</h3>`;
-            div.onclick = () => showCat(cat);
-            c.appendChild(div);
+    function renderCategorias() {
+        const grid = document.getElementById('view-categories');
+        grid.innerHTML = "";
+        Object.keys(datosMenu).forEach(cat => {
+            const btn = document.createElement('div');
+            btn.className = 'cat-card';
+            btn.innerHTML = `<h3>${cat}</h3>`;
+            btn.onclick = () => abrirCategoria(cat);
+            grid.appendChild(btn);
         });
     }
 
-    function showCat(cat) {
-        activeCat = cat;
+    function abrirCategoria(cat) {
+        categoriaActual = cat;
         document.getElementById('view-categories').style.display = 'none';
         document.getElementById('view-products').style.display = 'block';
         document.getElementById('cat-title').innerText = cat;
-        renderItems();
+        renderProductos();
         window.scrollTo(0,0);
     }
 
-    function renderItems() {
-        const l = document.getElementById('product-list');
-        l.innerHTML = "";
-        menu[activeCat].items.forEach((item, i) => {
-            const d = document.createElement('div');
-            d.className = 'product-item';
-            if(isAdmin) {
-                d.innerHTML = `
-                    <input class="admin-input" value="${item.n}" oninput="edit(${i},'n',this.value)">
-                    <input class="admin-input" value="${item.p}" oninput="edit(${i},'p',this.value)">
-                    <textarea class="admin-input" oninput="edit(${i},'d',this.value)">${item.d}</textarea>
-                    <button onclick="remove(${i})" style="color:red; background:none; border:none; cursor:pointer;">Eliminar</button>`;
+    function renderProductos() {
+        const lista = document.getElementById('product-list');
+        lista.innerHTML = "";
+        datosMenu[categoriaActual].items.forEach((item, idx) => {
+            const div = document.createElement('div');
+            div.className = 'product-item';
+            if(modoAdmin) {
+                div.innerHTML = `
+                    <input class="admin-input" value="${item.n}" oninput="actualizar(${idx},'n',this.value)">
+                    <input class="admin-input" value="${item.p}" oninput="actualizar(${idx},'p',this.value)">
+                    <textarea class="admin-input" oninput="actualizar(${idx},'d',this.value)">${item.d}</textarea>
+                    <button onclick="borrar(${idx})" style="color:red; margin-top:8px; background:none; border:none; cursor:pointer; font-size:10px;">[ELIMINAR]</button>
+                `;
             } else {
-                d.innerHTML = `
+                div.innerHTML = `
                     <div class="p-main-row"><span class="p-name">${item.n}</span><span class="p-price">$${item.p}</span></div>
-                    ${item.d ? `<div class="p-desc-view">${item.d}</div>` : ''}`;
+                    ${item.d ? `<div class="p-desc-view">${item.d}</div>` : ''}
+                `;
             }
-            l.appendChild(d);
+            lista.appendChild(div);
         });
-        document.getElementById('add-item-btn').style.display = isAdmin ? 'block' : 'none';
+        document.getElementById('add-item-btn').style.display = modoAdmin ? 'block' : 'none';
     }
 
     function showHome() {
@@ -258,33 +123,43 @@
     }
 
     function authAdmin() {
-        if(prompt("Contraseña:") === P) { 
-            isAdmin = true; 
-            loadCats(); 
-            if(activeCat) renderItems(); 
+        const pass = prompt("Clave:");
+        if(pass === CLAVE) {
+            modoAdmin = true;
+            renderCategorias();
+            if(categoriaActual) renderProductos();
+            alert("ADMIN ACTIVADO");
+        } else {
+            alert("INCORRECTA");
         }
     }
 
-    function edit(i, f, v) { 
-        menu[activeCat].items[i][f] = v; 
-        saveToLocal(); 
+    function actualizar(idx, campo, valor) {
+        datosMenu[categoriaActual].items[idx][campo] = valor;
+        localStorage.setItem('hakuna_final_db', JSON.stringify(datosMenu));
     }
 
-    function addNew() { 
-        menu[activeCat].items.push({n: "NUEVO", p: "0", d: ""}); 
-        saveToLocal();
-        renderItems(); 
+    function addNew() {
+        datosMenu[categoriaActual].items.push({n: "NUEVO", p: "0", d: ""});
+        renderProductos();
     }
 
-    function remove(i) { 
-        if(confirm("¿Eliminar?")) { 
-            menu[activeCat].items.splice(i, 1); 
-            saveToLocal();
-            renderItems(); 
-        } 
+    function borrar(idx) {
+        if(confirm("¿Borrar?")) {
+            datosMenu[categoriaActual].items.splice(idx, 1);
+            renderProductos();
+            localStorage.setItem('hakuna_final_db', JSON.stringify(datosMenu));
+        }
     }
 
-    loadCats();
+    function limpiarTodo() {
+        if(confirm("¿Restaurar todo el menú?")) {
+            localStorage.removeItem('hakuna_final_db');
+            location.reload();
+        }
+    }
+
+    renderCategorias();
 </script>
 </body>
 </html>
