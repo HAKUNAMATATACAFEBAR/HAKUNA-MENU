@@ -110,7 +110,6 @@
     let isAdmin = false;
     let activeCat = "";
 
-    // Datos iniciales por defecto sin emojis
     const defaultMenu = {
         "Entradas": { emoji: "", items: [
             {n: "PATACONES x10", p: "13.500", d: ""}, 
@@ -118,23 +117,16 @@
             {n: "PORCIÓN DE PAPAS A LA FRANCESA", p: "8.000", d: ""}
         ]},
         "Hamburguesas": { emoji: "", items: [
-            {n: "HAMBURGUESA TRADICIONAL", p: "25.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA.
-"}, 
-            {n: "HAMBURGUESA HAWAIANA", p: "27.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, PIÑA ASADA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA.
-"}, 
-            {n: "HAMBURGUESA GRATINADA", p: "30.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA, QUESO EXTRA.
-"}, 
+            {n: "HAMBURGUESA TRADICIONAL", p: "25.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA."}, 
+            {n: "HAMBURGUESA HAWAIANA", p: "27.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, PIÑA ASADA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA."}, 
+            {n: "HAMBURGUESA GRATINADA", p: "30.000", d: "CARNE DE LA CASA, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA, QUESO EXTRA."}, 
             {n: "HAMBURGUESA DE CHORIZO", p: "27.000", d: "CARNE DE CHORIZO, PAN BRIOCHE, TOCINETA, MOZZARELLA, BBQ, VEGETALES FRESCOS, CEBOLLA CARAMELIZADA."}
         ]},
         "Carnes": { emoji: "", items: [
-            {n: "PUNTA DE ANCA", p: "42.000", d: "250 GRAMOS DE PUNTA DE ANCA AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA
-"}, 
-            {n: "CHURRASCO", p: "42.000", d: "250 GRAMOS DE CHURRASCO AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA
-"}, 
-            {n: "PLATO DE CHORIZO X1", p: "14.000", d: "UN CHORIZO SANTARROSANO, TOMATE, LIMÓN, PAPA RUSTICA
-"}, 
-            {n: "PLATO DE CHORIZO X2", p: "23.000", d: "DOS CHORIZOS SANTARROSANOS, TOMATE, LIMÓN, PAPA RUSTICA
-"}
+            {n: "PUNTA DE ANCA", p: "42.000", d: "250 GRAMOS DE PUNTA DE ANCA AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA"}, 
+            {n: "CHURRASCO", p: "42.000", d: "250 GRAMOS DE CHURRASCO AL TÉRMINO DE SU ELECCIÓN, PAPA RUSTICA, ENSALADA, PIÑA ASADA Y CARAMELIZADA, CHIMICHURRI, GUACAMOLE DE LA CASA"}, 
+            {n: "PLATO DE CHORIZO X1", p: "14.000", d: "UN CHORIZO SANTARROSANO, TOMATE, LIMÓN, PAPA RUSTICA"}, 
+            {n: "PLATO DE CHORIZO X2", p: "23.000", d: "DOS CHORIZOS SANTARROSANOS, TOMATE, LIMÓN, PAPA RUSTICA"},
             {n: "PICADA HAKUNA X2", p: "60.000", d: "500 GRAMOS DE PROTEINA (SOLOMO DE RES, LOMO DE CERDO, TOCINETA, PECHUGA, CHORIZO SANTARROSANO), ACOMPAÑADA DE PAPA RUSTICA, PAPA CRIOLLA, AREPA, PATACONES, LECHUGA, TOMATE, LIMON, GUACAMOLE Y CHIMICHURRI DE LA CASA"}
         ]},
         "Salchipapas y más": { emoji: "", items: [
@@ -179,9 +171,9 @@
         ]},
         "Café": { emoji: "", items: [
             {n: "CAFÉ EXPRESSO", p: "5.000", d: ""}, {n: "CAFÉ EXPRESSO DOBLE", p: "5.000", d: ""}, {n: "CAFÉ AMERICANO", p: "5.000", d: ""}, {n: "CAFÉ CAMPESINO", p: "6.000", d: ""}, 
-            {n: "CAFÉ LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, {n: "MOCACCINO", p: "9.500", d: ""} 
+            {n: "CAFÉ LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, {n: "MOCACCINO", p: "9.500", d: ""},
             {n: "CAFÉ BOMBOM", p: "10.500", d: ""}, {n: "LATTE CARAMELO", p: "11.000", d: ""}, 
-            {n: "AFFOGATO", p: "14.000", d: ""}
+            {n: "AFFOGATO", p: "14.000", d: ""},
             {n: "CANELAZO SIN LICOR", p: "9.000", d: ""}
         ]},
         "Café con Licor": { emoji: "", items: [
@@ -206,112 +198,4 @@
             {n: "CORONA", p: "12.000", d: ""}, {n: "SOL", p: "12.000", d: ""}, 
             {n: "HEINEKEN", p: "12.000", d: ""}, {n: "TECATE", p: "10.000", d: ""}, 
             {n: "AGUILA LIGHT", p: "10.000", d: ""}, {n: "CLUB COLOMBIA", p: "10.000", d: ""}, 
-            {n: "TRES CORDILLERAS ROSADA", p: "14.000", d: ""}, {n: "TRES CORDILLERAS NEGRA", p: "14.000", d: ""}
-            {n: "AZTECA", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANGO BICHE, CERVEZA NACIONAL"}, 
-            {n: "APPLE GREEN", p: "17.500", d: "TEQUILA, SAL, LIMÓN, PIMIENTA ROJA, MANZANA VERDE, CERVEZA NACIONAL"}
-            {n: "TAMARINDO MICHELADO", p: "7.500", d: ""}, 
-            {n: "MICHELADO TRADICIONAL", p: "2.500", d: ""}, 
-            {n: "MICHELADO MANGO BICHE", p: "3.500", d: ""}, {n: "MICHELADO MARACUYÁ", p: "3.500", d: ""}, 
-            {n: "MICHELADO MARACUMANGO", p: "4.000", d: ""}
-        ]},
-        "Limonadas": { emoji: "", items: [
-            {n: "LIMONADA NATURAL", p: "7.500", d: ""}, {n: "LIMONADA DE COCO", p: "11.000", d: ""}, 
-            {n: "LIMONADA DE CEREZA", p: "11.000", d: ""}, {n: "LIMONADA DE HIERBABUENA", p: "11.000", d: ""}, 
-            {n: "LIMONADA DE PIÑA", p: "11.000", d: ""}, {n: "LIMONADA DE MANGO BICHE", p: "12.000", d: ""}, 
-            {n: "LIMONADA MANGO BICHE Y HIERBABUENA", p: "13.500", d: ""}, 
-            {n: "LIMONADA MARACUMANGO Y HIERBABUENA", p: "13.500", d: ""}, 
-            {n: "LIMONADA DE SANDÍA", p: "13.500", d: ""}, {n: "LIMONADA ELÉCTRICA", p: "14.500", d: ""}, 
-            {n: "LIMONADA DE VINO", p: "20.000", d: ""}
-        ]}
-    };
-
-    let menu = JSON.parse(localStorage.getItem('hakunaMenuData')) || defaultMenu;
-
-    function saveToLocal() {
-        localStorage.setItem('hakunaMenuData', JSON.stringify(menu));
-    }
-
-    function loadCats() {
-        const c = document.getElementById('view-categories');
-        c.innerHTML = "";
-        Object.keys(menu).forEach(cat => {
-            const div = document.createElement('div');
-            div.className = 'cat-card';
-            // Muestra el emoji si existe, sino no pone nada
-            div.innerHTML = `<span class="cat-emoji">${menu[cat].emoji || ''}</span><h3>${cat}</h3>`;
-            div.onclick = () => showCat(cat);
-            c.appendChild(div);
-        });
-    }
-
-    function showCat(cat) {
-        activeCat = cat;
-        document.getElementById('view-categories').style.display = 'none';
-        document.getElementById('view-products').style.display = 'block';
-        document.getElementById('cat-title').innerText = `${menu[cat].emoji || ''} ${cat}`;
-        renderItems();
-        window.scrollTo(0,0);
-    }
-
-    function renderItems() {
-        const l = document.getElementById('product-list');
-        l.innerHTML = "";
-        menu[activeCat].items.forEach((item, i) => {
-            const d = document.createElement('div');
-            d.className = 'product-item';
-            if(isAdmin) {
-                d.innerHTML = `
-                    <label style="font-size:0.6rem; color:var(--orange)">NOMBRE:</label>
-                    <input class="admin-input" value="${item.n}" oninput="edit(${i},'n',this.value)">
-                    <label style="font-size:0.6rem; color:var(--orange)">PRECIO:</label>
-                    <input class="admin-input" value="${item.p}" oninput="edit(${i},'p',this.value)">
-                    <label style="font-size:0.6rem; color:var(--orange)">DESCRIPCIÓN:</label>
-                    <textarea class="admin-input" style="height:60px" oninput="edit(${i},'d',this.value)" placeholder="Escribe la descripción aquí...">${item.d}</textarea>
-                    <button onclick="remove(${i})" style="color:#ff4444; background:none; border:1px solid #ff4444; cursor:pointer; padding:5px 10px; border-radius:5px; margin-top:5px; font-size:0.7rem;">ELIMINAR PRODUCTO</button>`;
-            } else {
-                d.innerHTML = `
-                    <div class="p-main-row"><span class="p-name">${item.n}</span><span class="p-price">$${item.p}</span></div>
-                    ${item.d ? `<div class="p-desc-view">${item.d}</div>` : ''}`;
-            }
-            l.appendChild(d);
-        });
-        document.getElementById('add-item-btn').style.display = isAdmin ? 'block' : 'none';
-    }
-
-    function showHome() {
-        document.getElementById('view-categories').style.display = 'grid';
-        document.getElementById('view-products').style.display = 'none';
-    }
-
-    function authAdmin() {
-        if(prompt("Contraseña:") === P) { 
-            isAdmin = true; 
-            loadCats(); 
-            if(activeCat) renderItems(); 
-            alert("Modo Administrador Activo. Las descripciones se guardarán automáticamente.");
-        }
-    }
-
-    function edit(i, f, v) { 
-        menu[activeCat].items[i][f] = v; 
-        saveToLocal(); 
-    }
-
-    function addNew() { 
-        menu[activeCat].items.push({n: "NUEVO PRODUCTO", p: "0.000", d: ""}); 
-        saveToLocal();
-        renderItems(); 
-    }
-
-    function remove(i) { 
-        if(confirm("¿Seguro que deseas eliminar este producto?")) { 
-            menu[activeCat].items.splice(i, 1); 
-            saveToLocal();
-            renderItems(); 
-        } 
-    }
-
-    loadCats();
-</script>
-</body>
-</html>
+            {n: "TRES CORDILLERAS
