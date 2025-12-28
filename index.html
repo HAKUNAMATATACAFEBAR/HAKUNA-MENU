@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakuna Matata | Menú Experiencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --orange: #ff8c00; 
+            --bg: #0a0a0a; 
+            --card: #161616; 
+            --text: #ffffff; 
+            --gray: #999999;
+        }
+
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+            background-image: radial-gradient(circle at top, #1a1a1a 0%, #0a0a0a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-decor {
+            position: fixed; opacity: 0.05; pointer-events: none; z-index: -1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(20deg); }
+        }
+
+        header { 
+            text-align: center; padding: 50px 20px; 
+            background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255, 140, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo { 
+            font-family: 'Oswald', sans-serif; font-size: 2.8rem; 
+            color: var(--orange); letter-spacing: 6px; margin: 0; 
+            text-transform: uppercase; text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .container { max-width: 700px; margin: auto; padding: 20px; }
+
+        .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+        .cat-card { 
+            background: var(--card); border: 1px solid rgba(255,255,255,0.05); 
+            padding: 25px 10px; text-align: center; border-radius: 16px; 
+            cursor: pointer; transition: 0.4s; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .cat-card:active { transform: scale(0.95); border-color: var(--orange); }
+        .cat-emoji { font-size: 1.5rem; margin-bottom: 8px; }
+        .cat-card h3 { 
+            margin: 0; font-family: 'Oswald'; color: var(--orange); 
+            font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; 
+        }
+
+        #view-products { display: none; animation: fadeIn 0.5s ease; }
+        .back-nav { color: var(--orange); cursor: pointer; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; }
+
+        .product-item { 
+            background: rgba(255,255,255,0.03); margin-bottom: 12px; 
+            padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .p-main-row { display: flex; justify-content: space-between; align-items: baseline; }
+        .p-name { font-family: 'Oswald'; color: var(--orange); font-size: 1.1rem; text-transform: uppercase; }
+        .p-price { font-family: 'Oswald'; font-weight: 700; color: #fff; }
+        .p-desc-view { font-size: 0.85rem; color: var(--gray); margin-top: 5px; line-height: 1.4; }
+
+        .admin-input { background: #000; border: 1px solid var(--orange); color: #fff; padding: 10px; width: 100%; margin-bottom: 5px; border-radius: 5px; box-sizing: border-box; }
+        .admin-btn { background: transparent; border: 1px solid #333; color: #444; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem; margin-top: 10px; }
+
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    </style>
+</head>
+<body>
+
+<div class="bg-decor" style="top:10%; left:5%; font-size:3rem;"></div>
+<div class="bg-decor" style="bottom:15%; right:10%; font-size:4rem; animation-delay:2s;"></div>
+<div class="bg-decor" style="top:50%; right:5%; font-size:2rem; opacity:0.02;"></div>
+
+<header>
+    <h1 class="logo">HAKUNA MATATA</h1>
+    <p style="font-size: 0.7rem; letter-spacing: 4px; color: var(--gray);">CAFÉ BAR</p>
+    <button class="admin-btn" onclick="authAdmin()">PANEL DE CONTROL</button>
+</header>
+
+<div class="container">
+    <div id="view-categories" class="cat-grid"></div>
+
+    <div id="view-products">
+        <span class="back-nav" onclick="showHome()">← Volver al Menú Principal</span>
+        <h2 id="cat-title" style="font-family:'Oswald'; border-left: 4px solid var(--orange); padding-left:15px; text-transform:uppercase;"></h2>
+        <div id="product-list"></div>
+        <button id="add-item-btn" style="display:none; width:100%; padding:15px; background:var(--orange); border:none; border-radius:10px; font-weight:700; cursor:pointer; margin-top: 20px;" onclick="addNew()">+ AGREGAR PRODUCTO</button>
+    </div>
+</div>
+
+<script>
+    const P = "Juano0709+";
+    let isAdmin = false;
+    let activeCat = "";
+
+    // Datos iniciales por defecto sin emojis
+    const defaultMenu = {
+        "Entradas": { emoji: "", items: [
+            {n: "PATACONES POR DIEZ UNIDADES", p: "13.500", d: ""}, 
+            {n: "AREPAS FRITAS POR DIEZ UNIDADES", p: "12.000", d: ""}, 
+            {n: "PORCIÓN DE PAPAS FRITAS", p: "8.000", d: ""}
+        ]},
+        "Hamburguesas": { emoji: "", items: [
+            {n: "HAMBURGUESA TRADICIONAL", p: "25.000", d: ""}, 
+            {n: "HAMBURGUESA HAWAIANA", p: "27.000", d: ""}, 
+            {n: "HAMBURGUESA GRATINADA", p: "30.000", d: ""}, 
+            {n: "HAMBURGUESA CON CHORIZO", p: "27.000", d: ""}
+        ]},
+        "Carnes": { emoji: "", items: [
+            {n: "PUNTA DE ANCA", p: "42.000", d: ""}, 
+            {n: "CHURRASCO", p: "42.000", d: ""}, 
+            {n: "PLATO DE CHORIZO UNA UNIDAD", p: "14.000", d: ""}, 
+            {n: "PLATO DE CHORIZO DOS UNIDADES", p: "23.000", d: ""}
+        ]},
+        "Salchipapas y más": { emoji: "", items: [
+            {n: "SALCHIPAPA MINI", p: "18.000", d: ""}, 
+            {n: "SALCHIPAPA TRADICIONAL", p: "26.000", d: ""}, 
+            {n: "SALCHIPAPA ESPECIAL", p: "30.000", d: ""}, 
+            {n: "MAICITOS", p: "27.000", d: ""}, 
+            {n: "QUESADILLAS", p: "16.000", d: ""}
+        ]},
+        "Jugos en Agua": { emoji: "", items: [
+            {n: "JUGO DE MARACUYÁ", p: "7.500", d: ""}, {n: "JUGO DE MANGO", p: "7.500", d: ""}, 
+            {n: "JUGO DE PIÑA", p: "7.500", d: ""}, {n: "JUGO DE MORA", p: "7.500", d: ""}, 
+            {n: "JUGO DE FRESA", p: "7.500", d: ""}, {n: "JUGO DE LULO", p: "7.500", d: ""}, 
+            {n: "JUGO DE GUANÁBANA", p: "7.500", d: ""}
+        ]},
+        "Jugos en Leche": { emoji: "", items: [
+            {n: "JUGO DE MARACUYÁ EN LECHE", p: "8.500", d: ""}, {n: "JUGO DE MANGO EN LECHE", p: "8.500", d: ""}, 
+            {n: "JUGO DE PIÑA EN LECHE", p: "8.500", d: ""}, {n: "JUGO DE MORA EN LECHE", p: "8.500", d: ""}, 
+            {n: "JUGO DE FRESA EN LECHE", p: "8.500", d: ""}, {n: "JUGO DE LULO EN LECHE", p: "8.500", d: ""}, 
+            {n: "JUGO DE GUANÁBANA EN LECHE", p: "8.500", d: ""}
+        ]},
+        "Frappés": { emoji: "", items: [
+            {n: "FRAPPÉ DE MANGO BICHE", p: "13.500", d: ""}, {n: "FRAPPÉ DE MILO", p: "14.000", d: ""}, 
+            {n: "FRAPPÉ DE CAFÉ", p: "14.000", d: ""}, {n: "FRAPPÉ DE MARACUYÁ", p: "16.000", d: ""}, 
+            {n: "FRAPPUCCINO", p: "16.000", d: ""}
+        ]},
+        "Malteadas": { emoji: "", items: [
+            {n: "MALTEADA DE VAINILLA", p: "17.000", d: ""}, {n: "MALTEADA DE CHOCOLATE", p: "17.000", d: ""}, 
+            {n: "MALTEADA DE OREO O BROWNIE", p: "17.000", d: ""}, {n: "MALTEADA DE FRESA", p: "17.000", d: ""}, 
+            {n: "MALTEADA DE COCO", p: "17.000", d: ""}, {n: "MALTEADA DE CAFÉ", p: "17.000", d: ""}, 
+            {n: "MALTEADA DE VAINILLA CON CHIPS", p: "17.000", d: ""}
+        ]},
+        "Mezclas y Sodas": { emoji: "", items: [
+            {n: "MEZCLA ESPECIAL UNO", p: "16.000", d: ""}, {n: "MEZCLA ESPECIAL DOS", p: "16.000", d: ""}, 
+            {n: "MEZCLA ESPECIAL TRES", p: "16.000", d: ""}, {n: "SODA SABORIZADA", p: "12.000", d: ""}
+        ]},
+        "Cocteles": { emoji: "", items: [
+            {n: "COPA DE VINO", p: "15.000", d: ""}, {n: "COCTEL VINO CALIENTE", p: "28.000", d: ""}, 
+            {n: "MARGARITA", p: "25.000", d: ""}, {n: "HAKUNA EN LA NOCHE", p: "30.000", d: ""}, 
+            {n: "BLUE DAIQUIRI", p: "28.000", d: ""}, {n: "MOJITO", p: "26.000", d: ""}, 
+            {n: "PIÑA COLADA", p: "28.000", d: ""}, {n: "ORGASMO", p: "28.000", d: ""}, 
+            {n: "AZTECA", p: "17.500", d: ""}, {n: "APPLE GREEN", p: "17.500", d: ""}
+        ]},
+        "Café": { emoji: "", items: [
+            {n: "CAFÉ AMERICANO", p: "5.000", d: ""}, {n: "CAFÉ CAMPESINO", p: "6.000", d: ""}, 
+            {n: "CAFÉ LATTE", p: "7.000", d: ""}, {n: "CAPUCCINO", p: "8.500", d: ""}, 
+            {n: "CAFÉ BOMBOM", p: "10.500", d: ""}, {n: "LATTE CARAMELO", p: "11.000", d: ""}, 
+            {n: "AFFOGATO", p: "14.000", d: ""}
+        ]},
+        "Café con Licor": { emoji: "", items: [
+            {n: "CARAJILLO", p: "11.000", d: ""}, {n: "CAPUCCINO CON BAILEYS", p: "14.000", d: ""}, 
+            {n: "CANELAZO CON LICOR", p: "14.500", d: ""}, {n: "CANELAZO SIN LICOR", p: "9.000", d: ""}
+        ]},
+        "Chocolate y Milo": { emoji: "", items: [
+            {n: "MILO FRÍO", p: "12.000", d: ""}, {n: "CHOCOLATE EN AGUA", p: "6.000", d: ""}, 
+            {n: "CHOCOLATE EN LECHE", p: "8.000", d: ""}, {n: "CHOCOMELO", p: "12.500", d: ""}, 
+            {n: "MILO CALIENTE", p: "9.000", d: ""}, {n: "MILOMELO", p: "15.000", d: ""}
+        ]},
+        "Aromáticas y Más": { emoji: "", items: [
+            {n: "AROMÁTICA SENCILLA", p: "4.000", d: ""}, {n: "AROMÁTICA CON PANELITA", p: "6.000", d: ""}, 
+            {n: "MIX DE FRUTAS", p: "10.000", d: ""}, {n: "AGUAPANELA CON QUESO", p: "9.000", d: ""}, 
+            {n: "BOTELLA DE AGUA", p: "6.000", d: ""}
+        ]},
+        "Adiciones": { emoji: "", items: [
+            {n: "ADICIÓN DE QUESO", p: "5.000", d: ""}, {n: "ADICIÓN DE LICOR", p: "6.000", d: ""}, 
+            {n: "ADICIÓN DE MANGO BICHE", p: "2.000", d: ""}
+        ]},
+        "Cervezas": { emoji: "", items: [
+            {n: "CERVEZA CORONA", p: "12.000", d: ""}, {n: "CERVEZA SOL", p: "12.000", d: ""}, 
+            {n: "CERVEZA HEINEKEN", p: "12.000", d: ""}, {n: "CERVEZA TECATE", p: "10.000", d: ""}, 
+            {n: "CERVEZA AGUILA LIGHT", p: "10.000", d: ""}, {n: "CERVEZA CLUB COLOMBIA", p: "10.000", d: ""}, 
+            {n: "CERVEZA TRES CORDILLERAS ROSADA", p: "14.000", d: ""}, {n: "CERVEZA TRES CORDILLERAS NEGRA", p: "14.000", d: ""}
+        ]},
+        "Michelados": { emoji: "", items: [
+            {n: "TAMARINDO MICHELADO", p: "7.500", d: ""}, {n: "MICHELADO TRADICIONAL", p: "2.500", d: ""}, 
+            {n: "MICHELADO MANGO BICHE", p: "3.500", d: ""}, {n: "MICHELADO MARACUYÁ", p: "3.500", d: ""}, 
+            {n: "MICHELADO MARACUMANGO", p: "4.000", d: ""}
+        ]},
+        "Limonadas": { emoji: "", items: [
+            {n: "LIMONADA NATURAL", p: "7.500", d: ""}, {n: "LIMONADA DE COCO", p: "11.000", d: ""}, 
+            {n: "LIMONADA DE CEREZA", p: "11.000", d: ""}, {n: "LIMONADA DE HIERBABUENA", p: "11.000", d: ""}, 
+            {n: "LIMONADA DE PIÑA", p: "11.000", d: ""}, {n: "LIMONADA DE MANGO BICHE", p: "12.000", d: ""}, 
+            {n: "LIMONADA MANGO BICHE Y HIERBABUENA", p: "13.500", d: ""}, 
+            {n: "LIMONADA MARACUMANGO Y HIERBABUENA", p: "13.500", d: ""}, 
+            {n: "LIMONADA DE SANDÍA", p: "13.500", d: ""}, {n: "LIMONADA ELÉCTRICA", p: "14.500", d: ""}, 
+            {n: "LIMONADA DE VINO", p: "20.000", d: ""}
+        ]}
+    };
+
+    let menu = JSON.parse(localStorage.getItem('hakunaMenuData')) || defaultMenu;
+
+    function saveToLocal() {
+        localStorage.setItem('hakunaMenuData', JSON.stringify(menu));
+    }
+
+    function loadCats() {
+        const c = document.getElementById('view-categories');
+        c.innerHTML = "";
+        Object.keys(menu).forEach(cat => {
+            const div = document.createElement('div');
+            div.className = 'cat-card';
+            // Muestra el emoji si existe, sino no pone nada
+            div.innerHTML = `<span class="cat-emoji">${menu[cat].emoji || ''}</span><h3>${cat}</h3>`;
+            div.onclick = () => showCat(cat);
+            c.appendChild(div);
+        });
+    }
+
+    function showCat(cat) {
+        activeCat = cat;
+        document.getElementById('view-categories').style.display = 'none';
+        document.getElementById('view-products').style.display = 'block';
+        document.getElementById('cat-title').innerText = `${menu[cat].emoji || ''} ${cat}`;
+        renderItems();
+        window.scrollTo(0,0);
+    }
+
+    function renderItems() {
+        const l = document.getElementById('product-list');
+        l.innerHTML = "";
+        menu[activeCat].items.forEach((item, i) => {
+            const d = document.createElement('div');
+            d.className = 'product-item';
+            if(isAdmin) {
+                d.innerHTML = `
+                    <label style="font-size:0.6rem; color:var(--orange)">NOMBRE:</label>
+                    <input class="admin-input" value="${item.n}" oninput="edit(${i},'n',this.value)">
+                    <label style="font-size:0.6rem; color:var(--orange)">PRECIO:</label>
+                    <input class="admin-input" value="${item.p}" oninput="edit(${i},'p',this.value)">
+                    <label style="font-size:0.6rem; color:var(--orange)">DESCRIPCIÓN:</label>
+                    <textarea class="admin-input" style="height:60px" oninput="edit(${i},'d',this.value)" placeholder="Escribe la descripción aquí...">${item.d}</textarea>
+                    <button onclick="remove(${i})" style="color:#ff4444; background:none; border:1px solid #ff4444; cursor:pointer; padding:5px 10px; border-radius:5px; margin-top:5px; font-size:0.7rem;">ELIMINAR PRODUCTO</button>`;
+            } else {
+                d.innerHTML = `
+                    <div class="p-main-row"><span class="p-name">${item.n}</span><span class="p-price">$${item.p}</span></div>
+                    ${item.d ? `<div class="p-desc-view">${item.d}</div>` : ''}`;
+            }
+            l.appendChild(d);
+        });
+        document.getElementById('add-item-btn').style.display = isAdmin ? 'block' : 'none';
+    }
+
+    function showHome() {
+        document.getElementById('view-categories').style.display = 'grid';
+        document.getElementById('view-products').style.display = 'none';
+    }
+
+    function authAdmin() {
+        if(prompt("Contraseña:") === P) { 
+            isAdmin = true; 
+            loadCats(); 
+            if(activeCat) renderItems(); 
+            alert("Modo Administrador Activo. Las descripciones se guardarán automáticamente.");
+        }
+    }
+
+    function edit(i, f, v) { 
+        menu[activeCat].items[i][f] = v; 
+        saveToLocal(); 
+    }
+
+    function addNew() { 
+        menu[activeCat].items.push({n: "NUEVO PRODUCTO", p: "0.000", d: ""}); 
+        saveToLocal();
+        renderItems(); 
+    }
+
+    function remove(i) { 
+        if(confirm("¿Seguro que deseas eliminar este producto?")) { 
+            menu[activeCat].items.splice(i, 1); 
+            saveToLocal();
+            renderItems(); 
+        } 
+    }
+
+    loadCats();
+</script>
+</body>
+</html>
