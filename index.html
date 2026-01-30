@@ -28,6 +28,7 @@
         .admin-input { background: #000; border: 1px solid var(--orange); color: #fff; padding: 10px; width: 100%; margin-bottom: 5px; border-radius: 5px; box-sizing: border-box; }
         .admin-btn { background: transparent; border: 1px solid #444; color: #666; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem; margin-top: 10px; }
         #loading-msg { text-align: center; color: var(--orange); padding: 20px; font-family: 'Oswald'; }
+        .service-note { text-align: center; color: var(--gray); font-size: 0.7rem; margin-top: 30px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -48,21 +49,20 @@
         <div id="product-list"></div>
         <button id="add-item-btn" style="display:none; width:100%; padding:15px; background:var(--orange); border:none; border-radius:10px; font-weight:700; cursor:pointer; margin-top: 20px;" onclick="addNew()">+ AGREGAR PRODUCTO</button>
     </div>
+    <div class="service-note">EL 10% DE SERVICIO ES OPCIONAL</div>
 </div>
 
 <script>
-    // --- CONFIGURACIÓN DE FIREBASE (PEGA TUS DATOS AQUÍ) ---
     const firebaseConfig = {
-  apiKey: "AIzaSyBt3JfX5HREq8s8d8UDH1096OSrH8jx0EM",
-  authDomain: "menu-hakuna.firebaseapp.com",
-  databaseURL: "https://menu-hakuna-default-rtdb.firebaseio.com",
-  projectId: "menu-hakuna",
-  storageBucket: "menu-hakuna.firebasestorage.app",
-  messagingSenderId: "859568903312",
-  appId: "1:859568903312:web:e8347a7baba42c4d60f415"
-};
+        apiKey: "AIzaSyBt3JfX5HREq8s8d8UDH1096OSrH8jx0EM",
+        authDomain: "menu-hakuna.firebaseapp.com",
+        databaseURL: "https://menu-hakuna-default-rtdb.firebaseio.com",
+        projectId: "menu-hakuna",
+        storageBucket: "menu-hakuna.firebasestorage.app",
+        messagingSenderId: "859568903312",
+        appId: "1:859568903312:web:e8347a7baba42c4d60f415"
+    };
     
-    // Inicializar Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
@@ -71,13 +71,11 @@
     let activeCat = "";
     let menu = {};
 
-    // Cargar datos en tiempo real desde Firebase
     db.ref('/').on('value', (snapshot) => {
         const data = snapshot.val();
         if (data) {
             menu = data;
             document.getElementById('loading-msg').style.display = 'none';
-            // Solo mostrar categorías si no estamos dentro de una
             if (document.getElementById('view-products').style.display !== 'block') {
                 document.getElementById('view-categories').style.display = 'grid';
             }
@@ -87,7 +85,6 @@
     });
 
     function save() {
-        // Guarda el estado actual del objeto menu en Firebase
         db.ref('/').set(menu);
     }
 
@@ -97,7 +94,9 @@
         Object.keys(menu).forEach(cat => {
             const div = document.createElement('div');
             div.className = 'cat-card';
-            div.innerHTML = `<h3>${cat}</h3>`;
+            // Ajuste para ocultar "01 ", "02 ", etc.
+            const displayTitle = (cat.charAt(0) >= '0' && cat.charAt(0) <= '9') ? cat.substring(3) : cat;
+            div.innerHTML = `<h3>${displayTitle}</h3>`;
             div.onclick = () => showCat(cat);
             c.appendChild(div);
         });
@@ -107,7 +106,8 @@
         activeCat = cat;
         document.getElementById('view-categories').style.display = 'none';
         document.getElementById('view-products').style.display = 'block';
-        document.getElementById('cat-title').innerText = cat;
+        const displayTitle = (cat.charAt(0) >= '0' && cat.charAt(0) <= '9') ? cat.substring(3) : cat;
+        document.getElementById('cat-title').innerText = displayTitle;
         renderItems();
         window.scrollTo(0,0);
     }
